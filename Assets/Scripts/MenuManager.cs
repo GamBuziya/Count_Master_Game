@@ -16,11 +16,4 @@ public class MenuManager : MonoBehaviour
         _tapToPlayText.transform.DOScale(1.2f, 0.5f).SetLoops(1000, LoopType.Yoyo).SetEase(_motionType);
         _hand.transform.DOMoveX(260, 1f).SetLoops(1000, LoopType.Yoyo).SetEase(_motionType);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
 }
