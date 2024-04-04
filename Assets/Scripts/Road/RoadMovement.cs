@@ -15,11 +15,21 @@ public class RoadMovement : MonoBehaviour
         _road = GetComponent<Transform>();
         EventManager.Instance.OnGameStart += EventManager_OnGameStart;
     }
+
+    private void EventManager_OnAttack()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Update()
     {
-        if (_isPlaying)
-        {
+        if (_isPlaying && !PlayerManager.Instance.IsAttacking())
+        { 
             _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed));
+        }
+        else if (PlayerManager.Instance.IsAttacking())
+        {
+            _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed * 0.5f));
         }
     }
 

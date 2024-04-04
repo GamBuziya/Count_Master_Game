@@ -27,14 +27,12 @@ public class PlayerMovement : MonoBehaviour
         EventManager.Instance.OnGameStart += EventManager_OnGameStart;
     }
 
-    
-
 
     private void Update()
     {
         StartGame();
         
-        if (_gameState)
+        if (_gameState && !PlayerManager.Instance.IsAttacking())
         {
             MoveThePlayer(); 
         }
@@ -108,6 +106,5 @@ public class PlayerMovement : MonoBehaviour
     {
         _gameState = true;
     }
-    
-    
+
 }

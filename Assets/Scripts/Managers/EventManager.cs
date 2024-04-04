@@ -13,6 +13,13 @@ public class EventManager : MonoBehaviour
     {
         OnGameStart?.Invoke();
     }
+    
+    public Action OnAttack;
+    public void Attack()
+    {
+        OnAttack?.Invoke();
+    }
+
 
 
     private void Awake()

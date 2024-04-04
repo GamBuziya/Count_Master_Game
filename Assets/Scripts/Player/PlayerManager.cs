@@ -1,22 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AbstractClasses;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : CharactersManager
 {
+    
+    
+    public Action OnMakeStickman;
     public static PlayerManager Instance;
     
-    [SerializeField] private TextMeshProUGUI _counter;
-    [SerializeField] private GameObject _stickman;
-    [Range(0f, 1f)] [SerializeField] private float _distanceFactor, _radius;
-
+    
     private int _numberOfStickmans;
-    private Transform _player;
+
+    [SerializeField] private Transform _enemy;
+    
+    private bool _isAttacking;
 
     private void Awake()
     {
@@ -25,9 +29,41 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        _player = transform;
         UpdateUI();
     }
+
+    private void Update()
+    {
+        if (_isAttacking)
+        {
+            var enemyDirection = new Vector3(_enemy.position.x, transform.position.y, _enemy.position.z) -
+                                 transform.position;
+            
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3);
+
+            Vector3 EnemyCordinate = _enemy.GetChild(1).GetChild(0).position; //Отримуєм координати першого ворога 
+
+            if (_enemy.GetChild(1).childCount > 1)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    var distance = EnemyCordinate - transform.GetChild(i).position;
+
+                    if (distance.magnitude < 1.5f)
+                    {
+                        
+                        transform.GetChild(i).position = Vector3.Lerp(
+                            transform.GetChild(i).position,
+                            new Vector3(EnemyCordinate.x, transform.GetChild(i).position.y, EnemyCordinate.z),
+                            Time.deltaTime * 3f);
+                    }
+                }
+            }
+        }
+    }
+
+
     private void UpdateUI()
     {
         _numberOfStickmans = transform.childCount - 1;
@@ -35,6 +71,7 @@ public class PlayerManager : MonoBehaviour
         _counter.text = _numberOfStickmans.ToString();
     }
 
+    
     private void UpdateNumber(bool multiply, int number)
     {
         if (multiply)
@@ -54,7 +91,13 @@ public class PlayerManager : MonoBehaviour
         if (other.CompareTag("Gate"))
         {
             UpdateNumber(other.GetComponent<GateManager>().Multiply, other.GetComponent<GateManager>().Number);
-        }   
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            EventManager.Instance.Attack();
+            _enemy = other.transform;
+            _isAttacking = true;
+        }
     }
     
     private void MakeStickman(int number)
@@ -63,28 +106,19 @@ public class PlayerManager : MonoBehaviour
         {
             Instantiate(_stickman, transform.position, quaternion.identity, transform);
         }
-
+        
+        OnMakeStickman?.Invoke();
         FormatStickMan();
         UpdateUI();
-    }
-
-    private void FormatStickMan()
-    {
-        for (int i = 0; i < transform.childCount - 1; i++)
-        {
-            if(_player.GetChild(i).CompareTag("Canvas")) continue;
-            
-            var x = _distanceFactor * Mathf.Sqrt(i) * Mathf.Cos(i * _radius);
-            var z = _distanceFactor * Mathf.Sqrt(i) * Mathf.Sin(i * _radius);
-
-            var newPosition = new Vector3(x, 0, z);
-
-            _player.GetChild(i).DOLocalMove(newPosition, 1f).SetEase(Ease.OutBack);
-        }
     }
 
     public int GetNumberOfStickmans()
     {
         return _numberOfStickmans;
+    }
+
+    public bool IsAttacking()
+    {
+        return _isAttacking;
     }
 }

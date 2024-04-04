@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Gate
   - Canvas
+  - Character
+  - Enemy
+  - OtherObj
   layers:
   - Default
   - TransparentFX
