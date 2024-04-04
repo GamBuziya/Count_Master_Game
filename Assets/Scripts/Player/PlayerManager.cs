@@ -9,12 +9,19 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance;
+    
     [SerializeField] private TextMeshProUGUI _counter;
     [SerializeField] private GameObject _stickman;
     [Range(0f, 1f)] [SerializeField] private float _distanceFactor, _radius;
 
     private int _numberOfStickmans;
     private Transform _player;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -74,5 +81,10 @@ public class PlayerManager : MonoBehaviour
 
             _player.GetChild(i).DOLocalMove(newPosition, 1f).SetEase(Ease.OutBack);
         }
+    }
+
+    public int GetNumberOfStickmans()
+    {
+        return _numberOfStickmans;
     }
 }

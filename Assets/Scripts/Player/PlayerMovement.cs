@@ -1,32 +1,59 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private bool _moveByTouch, _gameState;
+    [SerializeField] private bool _moveByTouch;
     [SerializeField] private float _playerSpeed, _roadSpeed;
-    [SerializeField] private Transform _road;
+    
+
+    [Header("Boarders")] 
+    [SerializeField] private float _leftBoarder = 0.12f;
+
+    [SerializeField] private float _rightBoarder = 3.42f;
+    
 
     private Vector3 _mouseStartPos, playerStartPos;
+    private bool _gameState = false;
 
     private Camera _camera;
 
     private void Start()
     {
         _camera = Camera.main;
+        EventManager.Instance.OnGameStart += EventManager_OnGameStart;
     }
+
+    
+
 
     private void Update()
     {
-        MoveThePlayer();
+        StartGame();
+        
+        if (_gameState)
+        {
+            MoveThePlayer(); 
+        }
+        
     }
 
+    private void StartGame()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _gameState = true;
+            EventManager.Instance.GameStart();
+        }
+    }
 
     void MoveThePlayer()
     {
-        if (Input.GetMouseButtonDown(0) && _gameState)
+
+        if (Input.GetMouseButtonDown(0))
         {
             _moveByTouch = true;
 
@@ -58,15 +85,29 @@ public class PlayerMovement : MonoBehaviour
 
                 var control = playerStartPos + move; // Для отримання позиції гравця
 
+                if (PlayerManager.Instance.GetNumberOfStickmans() >= 20)
+                {
+                    control.x = Mathf.Clamp(control.x, _leftBoarder + 0.5f, _rightBoarder - 0.5f);
+                }
+                else
+                {
+                    control.x = Mathf.Clamp(control.x, _leftBoarder, _rightBoarder);
+                }
+                
+
                 transform.position =
                     new Vector3(Mathf.Lerp(transform.position.x, control.x, Time.deltaTime * _playerSpeed),
                         transform.position.y, transform.position.z);
             }
         }
-
-        if (_gameState)
-        {
-            _road.Translate(-_road.forward * Time.deltaTime * _roadSpeed);
-        }
+        
+        
     }
+    
+    private void EventManager_OnGameStart()
+    {
+        _gameState = true;
+    }
+    
+    
 }
