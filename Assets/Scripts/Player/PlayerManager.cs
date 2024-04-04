@@ -17,10 +17,7 @@ public class PlayerManager : CharactersManager
     
     
     private int _numberOfStickmans;
-
-    [SerializeField] private Transform _enemy;
     
-    private bool _isAttacking;
 
     private void Awake()
     {
@@ -42,21 +39,20 @@ public class PlayerManager : CharactersManager
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3);
 
-            Vector3 EnemyCordinate = _enemy.GetChild(1).GetChild(0).position; //Отримуєм координати першого ворога 
-
+            var enemyCoordinate = _enemy.GetChild(1).GetChild(0).position;
             if (_enemy.GetChild(1).childCount > 1)
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    var distance = EnemyCordinate - transform.GetChild(i).position;
+                    var distance = enemyCoordinate - transform.GetChild(i).position;
 
-                    if (distance.magnitude < 1.5f)
+                    if (distance.magnitude < 2f)
                     {
                         
                         transform.GetChild(i).position = Vector3.Lerp(
                             transform.GetChild(i).position,
-                            new Vector3(EnemyCordinate.x, transform.GetChild(i).position.y, EnemyCordinate.z),
-                            Time.deltaTime * 3f);
+                            new Vector3(enemyCoordinate.x, transform.GetChild(i).position.y, enemyCoordinate.z), 
+                            Time.deltaTime * 1f);
                     }
                 }
             }
@@ -95,6 +91,9 @@ public class PlayerManager : CharactersManager
         else if (other.CompareTag("Enemy"))
         {
             EventManager.Instance.Attack();
+            var enemyManager = other.GetComponentInChildren<EnemyManager>();
+            enemyManager.StartAnimation();
+            enemyManager.Attack(transform);
             _enemy = other.transform;
             _isAttacking = true;
         }

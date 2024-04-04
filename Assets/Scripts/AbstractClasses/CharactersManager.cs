@@ -10,6 +10,8 @@ namespace AbstractClasses
         [SerializeField] protected GameObject _stickman;
         [Range(0f, 1f)] [SerializeField] protected float _distanceFactor, _radius;
         
+        protected Transform _enemy;
+        protected bool _isAttacking;
         
         protected void FormatStickMan()
         {
