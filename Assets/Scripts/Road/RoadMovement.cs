@@ -6,33 +6,33 @@ using UnityEngine;
 public class RoadMovement : MonoBehaviour
 {
     [SerializeField] private float _roadSpeed;
+    
     private Transform _road;
-
-    private bool _isPlaying;
 
     private void Start()
     {
         _road = GetComponent<Transform>();
-        EventManager.Instance.OnGameStart += EventManager_OnGameStart;
     }
     
 
     private void Update()
     {
-        if (_isPlaying && !PlayerManager.Instance.IsAttacking())
+        if (PlayerManager.Instance.IsPlaying && !PlayerManager.Instance.IsAttacking())
         { 
             _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed));
         }
-        else if (PlayerManager.Instance.IsAttacking())
+        else if (PlayerManager.Instance.IsAttacking() && PlayerManager.Instance.IsPlaying)
         {
             _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed * 0.5f));
         }
+        else
+        {
+            _road.Translate(-_road.forward * 0);
+        }
+        
+            
     }
 
-
-    void EventManager_OnGameStart()
-    {
-        _isPlaying = true;
-    }
+    
     
 }

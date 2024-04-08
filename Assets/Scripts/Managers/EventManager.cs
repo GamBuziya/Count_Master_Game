@@ -20,6 +20,13 @@ public class EventManager : MonoBehaviour
         OnAttack?.Invoke();
     }
 
+    public Action OnGameOver;
+    public void GameOver()
+    {
+        Debug.Log("GameOver");
+        OnGameOver?.Invoke();
+    }
+
 
 
     private void Awake()

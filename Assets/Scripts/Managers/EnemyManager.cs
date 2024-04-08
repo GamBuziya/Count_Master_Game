@@ -12,6 +12,9 @@ public class EnemyManager : CharactersManager
 
     private void Start()
     {
+        EventManager.Instance.OnGameOver += GameOver;
+        
+        CharacterAnimator = GetComponent<EnemyAnimating>();
         _numberOfStickmans = Random.Range(5, 30);
         
         for (int i = 0; i < _numberOfStickmans; i++)
@@ -25,6 +28,7 @@ public class EnemyManager : CharactersManager
 
     private void Update()
     {
+
         if (_isAttacking)
         {
             var enemyDirection = _enemy.position - transform.position;
@@ -37,7 +41,7 @@ public class EnemyManager : CharactersManager
                     quaternion.LookRotation(enemyDirection, Vector3.up),
                     Time.deltaTime * 1f);
 
-                if(_enemy.childCount <= 1) break; 
+                if(_enemy.childCount <= 1) continue; 
                 
                 var distance = _enemy.GetChild(1).position - transform.GetChild(i).position;
 
@@ -49,7 +53,14 @@ public class EnemyManager : CharactersManager
                         Time.deltaTime * 2f);
                 }
             }
+            
+            if (_enemy.GetComponent<PlayerManager>().GetNumberOfStickmans() <= 1)
+            {
+                EventManager.Instance.GameOver();
+            }
         }
+        
+        
     }
 
     public void Attack(Transform enemyForce)
@@ -60,12 +71,18 @@ public class EnemyManager : CharactersManager
 
     public void StartAnimation()
     {
-        GetComponent<EnemyAnimating>().RunAnimation();
+        GetComponent<EnemyAnimating>().ActivateAnimation();
     }
 
-    public int GetCountOfEnemies()
+    public void GameOver()
     {
-        return _numberOfStickmans;
+        Debug.Log("CharacterAnimator.StopAnimating();");
+        CharacterAnimator.StopAnimating();
+        for (int i = 0; i < _enemy.childCount; i++)
+        {
+            _enemy.GetChild(i).gameObject.SetActive(false);
+        }
     }
+    
     
 }

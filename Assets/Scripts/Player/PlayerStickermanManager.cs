@@ -19,7 +19,8 @@ public class PlayerStickmanManager : MonoBehaviour
             }
             case "Ramp":
             {
-                transform.DOJump(transform.position, 1.5f, 1, 1f).SetEase(Ease.Flash);
+                transform.DOJump(transform.position, 1.5f, 1, 1f)
+                    .SetEase(Ease.Flash);
                 break;
             }
         }

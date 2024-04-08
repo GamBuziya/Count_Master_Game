@@ -13,18 +13,33 @@ public class PlayerManager : CharactersManager
     public Action OnMakeStickman;
     public static PlayerManager Instance;
 
+    public bool IsPlaying;
+
     private void Awake()
     {
+        CharacterAnimator = GetComponent<PlayerAnimating>();
         Instance = this;
     }
 
     private void Start()
     {
+        EventManager.Instance.OnGameStart += () =>
+        {
+            Debug.Log("IsPlaying = true;");
+            IsPlaying = true;
+        };
+
+        EventManager.Instance.OnGameOver += () =>
+        {
+            Debug.Log("IsPlaying = false;");
+            IsPlaying = false;
+        };
         UpdateUI();
     }
 
     private void Update()
     {
+        
         if (_isAttacking)
         {
             var enemyDirection = new Vector3(_enemy.position.x, transform.position.y, _enemy.position.z) -

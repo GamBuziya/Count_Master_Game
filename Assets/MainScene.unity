@@ -1748,7 +1748,7 @@ Transform:
   m_GameObject: {fileID: 440260566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.57}
+  m_LocalPosition: {x: 0, y: 0, z: 18.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2724,8 +2724,7 @@ MonoBehaviour:
   _counter: {fileID: 112660245}
   _stickman: {fileID: 7882948545266300487, guid: c5d0153ce79b28a42bb608e7dfa4f763,
     type: 3}
-  _distanceFactor: 0.111
-  _radius: 0.92
+  _distanceFactor: 0.411
 --- !u!114 &680093339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3861,7 +3860,7 @@ Transform:
   m_GameObject: {fileID: 993431323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22.21}
+  m_LocalPosition: {x: 0, y: 0, z: 24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4294,14 +4293,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1168935007}
   - component: {fileID: 1168935008}
-  - component: {fileID: 1168935009}
   m_Layer: 0
   m_Name: EnemyZone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1168935007
 Transform:
   m_ObjectHideFlags: 0
@@ -4311,7 +4309,7 @@ Transform:
   m_GameObject: {fileID: 1168935005}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.98, y: 2.48, z: -32.02}
+  m_LocalPosition: {x: 1.98, y: 2.48, z: -31.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4341,19 +4339,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4171977, y: 1, z: 2.7316628}
   m_Center: {x: -0.17798638, y: 0, z: 0.11951637}
---- !u!114 &1168935009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168935005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e744731baed625b458b91ad0ad24e11c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _countOfEnemies: {fileID: 0}
 --- !u!4 &1170267129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2690024024947667489, guid: bc2379f8ffd36f3468cbd55afa4e3491,
@@ -5617,7 +5602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1735878541
 Transform:
   m_ObjectHideFlags: 0
@@ -6979,8 +6964,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247353880997173457, guid: 130cc2c1a2e46dd4dbfb65a73bcde9a1,
         type: 3}
+      propertyPath: _coefficient
+      value: 0.321
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247353880997173457, guid: 130cc2c1a2e46dd4dbfb65a73bcde9a1,
+        type: 3}
       propertyPath: _distanceFactor
-      value: 0.7
+      value: 0.463
       objectReference: {fileID: 0}
     - target: {fileID: 5356340571714836520, guid: 130cc2c1a2e46dd4dbfb65a73bcde9a1,
         type: 3}

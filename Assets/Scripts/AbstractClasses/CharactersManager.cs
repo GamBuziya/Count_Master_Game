@@ -9,15 +9,16 @@ namespace AbstractClasses
         [SerializeField] protected TextMeshProUGUI _counter;
         [SerializeField] protected GameObject _stickman;
         [Range(0f, 1f)] [SerializeField] protected float _distanceFactor;
+
         
-        
-        
+        public Animator CharacterAnimator { get; protected set; }
         protected int _numberOfStickmans;
         protected Transform _enemy;
         protected bool _isAttacking;
         protected float _coefficient = 0.03f;
         
-        protected void FormatStickMan()
+        
+        public void FormatStickMan()
         {
             float distance = 0f;
             if (_numberOfStickmans < 20)
@@ -63,6 +64,11 @@ namespace AbstractClasses
         {
             _numberOfStickmans--;
             UpdateUI();
+        }
+
+        public int GetNumberOfStickmans()
+        {
+            return _numberOfStickmans;
         }
     }
 }
