@@ -26,3 +26,4 @@ public class MenuManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
+

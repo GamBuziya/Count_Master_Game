@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 865790858492868173}
   m_Layer: 0
   m_Name: Canvas
-  m_TagString: Canvas
+  m_TagString: OtherObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6695849987941844944}
   - component: {fileID: 5170058555490955147}
+  - component: {fileID: 1532906319389506636}
   - component: {fileID: 4247353880997173457}
   - component: {fileID: 5356340571714836520}
   - component: {fileID: 5105904102025406624}
@@ -234,8 +235,35 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21107566, y: 0.37712574, z: 0.14920807}
-  m_Center: {x: -0.0076280236, y: 0.16300154, z: 0.011001587}
+  m_Size: {x: 0.21107566, y: 0.37712574, z: 0.15528107}
+  m_Center: {x: -0.0076280236, y: 0.16300154, z: 0.014038086}
+--- !u!54 &1532906319389506636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218806594861649330}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &4247353880997173457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +452,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6695849987941844944}
     m_Modifications:
+    - target: {fileID: 897440491487005167, guid: f64b67df79ec7f142b32422e87108b84,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561606651463730429, guid: f64b67df79ec7f142b32422e87108b84,
         type: 3}
       propertyPath: m_LocalPosition.x

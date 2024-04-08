@@ -9,9 +9,12 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : CharactersManager
 {
+
     private void Start()
     {
-        for (int i = 0; i < Random.Range(5, 100); i++)
+        _numberOfStickmans = Random.Range(5, 30);
+        
+        for (int i = 0; i < _numberOfStickmans; i++)
         {
             Instantiate(_stickman, transform.position, new Quaternion(0f, 180f, 0f, 1f), transform);
         }
@@ -22,7 +25,7 @@ public class EnemyManager : CharactersManager
 
     private void Update()
     {
-        if (_isAttacking && transform.childCount > 1)
+        if (_isAttacking)
         {
             var enemyDirection = _enemy.position - transform.position;
             
@@ -34,6 +37,8 @@ public class EnemyManager : CharactersManager
                     quaternion.LookRotation(enemyDirection, Vector3.up),
                     Time.deltaTime * 1f);
 
+                if(_enemy.childCount <= 1) break; 
+                
                 var distance = _enemy.GetChild(1).position - transform.GetChild(i).position;
 
                 if (distance.magnitude < 2f)
@@ -57,4 +62,10 @@ public class EnemyManager : CharactersManager
     {
         GetComponent<EnemyAnimating>().RunAnimation();
     }
+
+    public int GetCountOfEnemies()
+    {
+        return _numberOfStickmans;
+    }
+    
 }

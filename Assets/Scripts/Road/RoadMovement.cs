@@ -15,11 +15,7 @@ public class RoadMovement : MonoBehaviour
         _road = GetComponent<Transform>();
         EventManager.Instance.OnGameStart += EventManager_OnGameStart;
     }
-
-    private void EventManager_OnAttack()
-    {
-        throw new NotImplementedException();
-    }
+    
 
     private void Update()
     {

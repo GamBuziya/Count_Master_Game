@@ -10,14 +10,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : CharactersManager
 {
-    
-    
     public Action OnMakeStickman;
     public static PlayerManager Instance;
-    
-    
-    private int _numberOfStickmans;
-    
 
     private void Awake()
     {
@@ -39,11 +33,15 @@ public class PlayerManager : CharactersManager
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3);
 
-            var enemyCoordinate = _enemy.GetChild(1).GetChild(0).position;
+            
             if (_enemy.GetChild(1).childCount > 1)
             {
+                var enemyCoordinate = _enemy.GetChild(1).GetChild(0).position;
+                
                 for (int i = 0; i < transform.childCount; i++)
                 {
+                    if(transform.GetChild(i).CompareTag("OtherObj")) continue;
+                    
                     var distance = enemyCoordinate - transform.GetChild(i).position;
 
                     if (distance.magnitude < 2f)
@@ -56,18 +54,28 @@ public class PlayerManager : CharactersManager
                     }
                 }
             }
+            else
+            {
+                _isAttacking = false;
+                _enemy.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (transform.childCount > 1f)
+            {
+                if (transform.GetChild(1).rotation != Quaternion.identity)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).rotation = Quaternion.identity;
+                    }
+                    FormatStickMan();
+                }
+            }
         }
     }
 
-
-    private void UpdateUI()
-    {
-        _numberOfStickmans = transform.childCount - 1;
-
-        _counter.text = _numberOfStickmans.ToString();
-    }
-
-    
     private void UpdateNumber(bool multiply, int number)
     {
         if (multiply)

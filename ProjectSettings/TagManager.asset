@@ -9,6 +9,8 @@ TagManager:
   - Character
   - Enemy
   - OtherObj
+  - EnemyCharacter
+  - Ramp
   layers:
   - Default
   - TransparentFX
