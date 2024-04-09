@@ -23,7 +23,7 @@ public class RoadMovement : MonoBehaviour
         }
         else if (PlayerManager.Instance.IsAttacking() && PlayerManager.Instance.IsPlaying)
         {
-            _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed * 0.5f));
+            _road.Translate(-_road.forward * (Time.deltaTime * _roadSpeed * 0.2f));
         }
         else
         {

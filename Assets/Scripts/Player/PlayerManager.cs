@@ -25,13 +25,11 @@ public class PlayerManager : CharactersManager
     {
         EventManager.Instance.OnGameStart += () =>
         {
-            Debug.Log("IsPlaying = true;");
             IsPlaying = true;
         };
 
         EventManager.Instance.OnGameOver += () =>
         {
-            Debug.Log("IsPlaying = false;");
             IsPlaying = false;
         };
         UpdateUI();
@@ -45,8 +43,7 @@ public class PlayerManager : CharactersManager
             var enemyDirection = new Vector3(_enemy.position.x, transform.position.y, _enemy.position.z) -
                                  transform.position;
             
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3);
+            
 
             
             if (_enemy.GetChild(1).childCount > 1)
@@ -57,9 +54,15 @@ public class PlayerManager : CharactersManager
                 {
                     if(transform.GetChild(i).CompareTag("OtherObj")) continue;
                     
+                    transform.GetChild(i).rotation = Quaternion.Slerp(
+                        transform.GetChild(i).rotation, 
+                        Quaternion.LookRotation(enemyDirection, Vector3.up), 
+                        Time.deltaTime * 3);
+                    
+                    
                     var distance = enemyCoordinate - transform.GetChild(i).position;
 
-                    if (distance.magnitude < 2f)
+                    if (distance.magnitude < 1.5f)
                     {
                         
                         transform.GetChild(i).position = Vector3.Lerp(

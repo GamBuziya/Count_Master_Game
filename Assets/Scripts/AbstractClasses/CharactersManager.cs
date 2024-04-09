@@ -33,8 +33,7 @@ namespace AbstractClasses
             {
                 distance  = _numberOfStickmans * _distanceFactor * _coefficient;
             }
-                
-            Debug.Log("Distance " + distance);
+            
             for (int i = 0; i < transform.childCount - 1; i++)
             {
                 if(transform.GetChild(i).CompareTag("OtherObj")) continue;
