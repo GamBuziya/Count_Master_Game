@@ -9,18 +9,31 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : CharactersManager
 {
-
+    [SerializeField] private int NumberOfStickmans;
     private void Start()
     {
         EventManager.Instance.OnGameOver += GameOver;
+
+
+        _enemy = GameObject.Find("Player").GetComponent<Transform>();
         
         CharacterAnimator = GetComponent<EnemyAnimating>();
-        _numberOfStickmans = Random.Range(5, 30);
+
+        if (NumberOfStickmans == 0)
+        {
+            _numberOfStickmans = 10;
+        }
+        else
+        {
+            _numberOfStickmans = NumberOfStickmans;
+        }
+        
         
         for (int i = 0; i < _numberOfStickmans; i++)
         {
             Instantiate(_stickman, transform.position, new Quaternion(0f, 180f, 0f, 1f), transform);
         }
+        
         
         FormatStickMan();
         _counter.text = (transform.childCount - 1).ToString();
@@ -28,7 +41,6 @@ public class EnemyManager : CharactersManager
 
     private void Update()
     {
-
         if (_isAttacking)
         {
             var enemyDirection = _enemy.position - transform.position;
@@ -36,6 +48,8 @@ public class EnemyManager : CharactersManager
             
             for (int i = 0; i < transform.childCount; i++)
             {
+                if(transform.GetChild(i).CompareTag("OtherObj")) continue;
+                
                 transform.GetChild(i).rotation = Quaternion.Slerp(
                     transform.GetChild(i).rotation,
                     quaternion.LookRotation(enemyDirection, Vector3.up),
@@ -61,11 +75,11 @@ public class EnemyManager : CharactersManager
         }
         
         
+        
     }
 
     public void Attack(Transform enemyForce)
     {
-        _enemy = enemyForce;
         _isAttacking = true;
     }
 
@@ -76,11 +90,10 @@ public class EnemyManager : CharactersManager
 
     public void GameOver()
     {
-        Debug.Log("CharacterAnimator.StopAnimating();");
         CharacterAnimator.StopAnimating();
         for (int i = 0; i < _enemy.childCount; i++)
         {
-            _enemy.GetChild(i).gameObject.SetActive(false);
+            _enemy.gameObject.SetActive(false);
         }
     }
     

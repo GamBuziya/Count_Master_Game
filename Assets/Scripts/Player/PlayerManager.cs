@@ -14,6 +14,9 @@ public class PlayerManager : CharactersManager
     public static PlayerManager Instance;
 
     public bool IsPlaying;
+    
+    
+    private bool _minusStickmansInvoked = false;
 
     private void Awake()
     {
@@ -37,16 +40,13 @@ public class PlayerManager : CharactersManager
 
     private void Update()
     {
-        
+        //Це треба всунути в окремий клас 
         if (_isAttacking)
         {
             var enemyDirection = new Vector3(_enemy.position.x, transform.position.y, _enemy.position.z) -
                                  transform.position;
-            
-            
 
-            
-            if (_enemy.GetChild(1).childCount > 1)
+            if (_enemy.childCount > 1)
             {
                 var enemyCoordinate = _enemy.GetChild(1).GetChild(0).position;
                 
@@ -71,9 +71,17 @@ public class PlayerManager : CharactersManager
                             Time.deltaTime * 1f);
                     }
                 }
+                
+                if (!_minusStickmansInvoked)
+                {
+                    MinusStickmans();
+                    _minusStickmansInvoked = true;
+                }
+                
             }
             else
             {
+                _minusStickmansInvoked = false;
                 _isAttacking = false;
                 _enemy.gameObject.SetActive(false);
             }
@@ -86,24 +94,68 @@ public class PlayerManager : CharactersManager
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
+                        if(transform.GetChild(i).CompareTag("OtherObj")) continue;
                         transform.GetChild(i).rotation = Quaternion.identity;
                     }
                     FormatStickMan();
                 }
             }
         }
+        //Це все
     }
+
+    private void MinusStickmans()
+    {
+        if (_enemy == null)
+        {
+            Debug.LogWarning("Can not delete stickmans, don't have an enemy object");
+            return;
+        }
+
+        var countToDelete = Mathf.Min(_numberOfStickmans, _enemy.gameObject.GetComponent<EnemyManager>().GetNumberOfStickmans());
+
+        DeleteStickmansCoroutine(countToDelete);
+    }
+
+    private void DeleteStickmansCoroutine(int count)
+    {
+        Debug.Log(count);
+        var i = 0;
+        while(i < count)
+        {
+            Invoke("DeleteWithInvoke", 0.1f * i);
+            i++;
+        }
+        
+    }
+
+    private void DeleteWithInvoke()
+    {
+        _enemy.gameObject.GetComponent<EnemyManager>().DestroyOneStickman();
+        DestroyOneStickman();
+    }
+
 
     private void UpdateNumber(bool multiply, int number)
     {
+        var temp = 0;
+
         if (multiply)
         {
-            MakeStickman(_numberOfStickmans *= number);
+            temp = (_numberOfStickmans * number) - _numberOfStickmans;
         }
         else
         {
-            MakeStickman(_numberOfStickmans += number);
+            temp = number;
         }
+        
+        for (int i = 0; i < temp; i++)
+        {
+            Instantiate(_stickman, transform.position, Quaternion.identity, transform);
+        }
+    
+        OnMakeStickman?.Invoke();
+        FormatStickMan();
 
         UpdateUI();
     }
@@ -120,27 +172,11 @@ public class PlayerManager : CharactersManager
             var enemyManager = other.GetComponentInChildren<EnemyManager>();
             enemyManager.StartAnimation();
             enemyManager.Attack(transform);
-            _enemy = other.transform;
+            _enemy = enemyManager.transform;
             _isAttacking = true;
         }
     }
     
-    private void MakeStickman(int number)
-    {
-        for (int i = 0; i < number; i++)
-        {
-            Instantiate(_stickman, transform.position, quaternion.identity, transform);
-        }
-        
-        OnMakeStickman?.Invoke();
-        FormatStickMan();
-        UpdateUI();
-    }
-
-    public int GetNumberOfStickmans()
-    {
-        return _numberOfStickmans;
-    }
 
     public bool IsAttacking()
     {

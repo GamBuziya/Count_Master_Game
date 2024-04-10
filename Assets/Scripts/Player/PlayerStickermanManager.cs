@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -9,14 +10,6 @@ public class PlayerStickmanManager : MonoBehaviour
     {
         switch (other.tag)
         {
-            case "EnemyCharacter":
-            {
-                transform.parent.gameObject.GetComponent<PlayerManager>().MinusStickman();
-                other.transform.parent.gameObject.GetComponent<EnemyManager>().MinusStickman();
-                Destroy(gameObject);
-                Destroy(other.gameObject);
-                break;
-            }
             case "Ramp":
             {
                 transform.DOJump(transform.position, 1.5f, 1, 1f)
@@ -24,5 +17,11 @@ public class PlayerStickmanManager : MonoBehaviour
                 break;
             }
         }
+        
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("OnDestoy " + name);
     }
 }
