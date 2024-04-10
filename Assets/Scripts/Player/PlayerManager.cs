@@ -112,27 +112,29 @@ public class PlayerManager : CharactersManager
             return;
         }
 
+        // Get the minimum number of stickmen between player and enemy
         var countToDelete = Mathf.Min(_numberOfStickmans, _enemy.gameObject.GetComponent<EnemyManager>().GetNumberOfStickmans());
 
-        DeleteStickmansCoroutine(countToDelete);
-    }
-
-    private void DeleteStickmansCoroutine(int count)
-    {
-        Debug.Log(count);
+        Debug.Log(countToDelete);
         var i = 0;
-        while(i < count)
+        while (i < countToDelete)
         {
+            // Invoke deletion with a delay for each stickman
             Invoke("DeleteWithInvoke", 0.1f * i);
             i++;
         }
-        
     }
+    
 
     private void DeleteWithInvoke()
     {
-        _enemy.gameObject.GetComponent<EnemyManager>().DestroyOneStickman();
-        DestroyOneStickman();
+        // Ensure both player and enemy have stickmen to delete
+        if (_numberOfStickmans > 0 && _enemy.gameObject.GetComponent<EnemyManager>().GetNumberOfStickmans() > 0)
+        {
+            // Delete one stickman from both player and enemy
+            _enemy.gameObject.GetComponent<EnemyManager>().DestroyOneStickman();
+            DestroyOneStickman();
+        }
     }
 
 

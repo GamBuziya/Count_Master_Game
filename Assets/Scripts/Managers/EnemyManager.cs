@@ -68,7 +68,7 @@ public class EnemyManager : CharactersManager
                 }
             }
             
-            if (_enemy.GetComponent<PlayerManager>().GetNumberOfStickmans() <= 1)
+            if (_enemy.GetComponent<PlayerManager>().GetNumberOfStickmans() <= 0)
             {
                 EventManager.Instance.GameOver();
             }

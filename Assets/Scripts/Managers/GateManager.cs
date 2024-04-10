@@ -18,7 +18,10 @@ public class GateManager : MonoBehaviour
         }
         else
         {
-            Number = 42;
+            if (Number == 0)
+            {
+                Number = 10; 
+            }
             
             _gateNO.text = "+" + Number.ToString();
         }

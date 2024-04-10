@@ -58,13 +58,6 @@
                 _counter.text = _numberOfStickmans.ToString();
             }
             
-            protected void UpdateUI(string a)
-            {
-                _numberOfStickmans = transform.childCount - 1;
-                _counter.text = _numberOfStickmans.ToString();
-                Debug.Log("a" + _numberOfStickmans);
-            }
-            
             
             public int GetNumberOfStickmans()
             {
@@ -73,6 +66,7 @@
 
             public void DestroyOneStickman()
             {
+                Debug.Log("DestroyOneStickman" + name);
                 //Debug.Log("Enter in DestroyOneStickman");
                 if (transform.childCount <= 1)
                 {

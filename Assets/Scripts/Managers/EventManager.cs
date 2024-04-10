@@ -23,7 +23,6 @@ public class EventManager : MonoBehaviour
     public Action OnGameOver;
     public void GameOver()
     {
-        Debug.Log("GameOver");
         OnGameOver?.Invoke();
     }
 

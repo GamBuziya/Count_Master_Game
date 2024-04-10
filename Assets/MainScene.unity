@@ -3695,7 +3695,7 @@ PrefabInstance:
     - target: {fileID: 8543250102326229702, guid: 4f8fe53e31a92e341bd0089a9efcb61f,
         type: 3}
       propertyPath: NumberOfStickmans
-      value: 51
+      value: 21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4406,7 +4406,7 @@ PrefabInstance:
     - target: {fileID: 3587884940925571106, guid: bc2379f8ffd36f3468cbd55afa4e3491,
         type: 3}
       propertyPath: Number
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4253192606450506572, guid: bc2379f8ffd36f3468cbd55afa4e3491,
         type: 3}
@@ -5778,6 +5778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543250102326229702, guid: 4f8fe53e31a92e341bd0089a9efcb61f,
+        type: 3}
+      propertyPath: NumberOfStickmans
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

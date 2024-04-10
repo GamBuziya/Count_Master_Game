@@ -19,9 +19,4 @@ public class PlayerStickmanManager : MonoBehaviour
         }
         
     }
-
-    private void OnDestroy()
-    {
-        Debug.Log("OnDestoy " + name);
-    }
 }
