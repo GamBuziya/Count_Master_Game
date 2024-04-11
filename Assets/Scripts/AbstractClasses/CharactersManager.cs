@@ -10,31 +10,37 @@
             [SerializeField] protected GameObject _stickman;
             [Range(0f, 1f)] [SerializeField] protected float _distanceFactor;
 
+            [Header("ParticleEffects")] [SerializeField]
+            private ParticleSystem _blood;
             
             public Animator CharacterAnimator { get; protected set; }
             protected int _numberOfStickmans;
             protected Transform _enemy;
             protected bool _isAttacking;
-            protected float _coefficient = 0.03f;
+            protected float _coefficient = 0.05f;
 
             
             public void FormatStickMan()
             {
                 float distance = 0f;
-                if (_numberOfStickmans < 20)
+                if (_numberOfStickmans < 5)
                 {
                     distance = 0.3f;
                 }
+                else if (_numberOfStickmans < 20)
+                {
+                    distance = 0.5f;
+                }
                 else if (_numberOfStickmans > 120)
                 {
-                    distance = 1.2f;
+                    distance = 1.6f;
                 }
                 else
                 {
                     distance  = _numberOfStickmans * _distanceFactor * _coefficient;
                 }
                 
-                for (int i = 0; i < transform.childCount - 1; i++)
+                for (int i = 0; i < transform.childCount; i++)
                 {
                     if(transform.GetChild(i).CompareTag("OtherObj")) continue;
 
@@ -66,14 +72,13 @@
 
             public void DestroyOneStickman()
             {
-                Debug.Log("DestroyOneStickman" + name);
-                //Debug.Log("Enter in DestroyOneStickman");
                 if (transform.childCount <= 1)
                 {
                     Debug.LogWarning("There are no stickman to destroy or only one stickman exists.");
                     return;
                 }
 
+                Instantiate(_blood, transform.GetChild(1).position, Quaternion.identity);
                 Destroy(transform.GetChild(1).gameObject);
 
                 _numberOfStickmans--;

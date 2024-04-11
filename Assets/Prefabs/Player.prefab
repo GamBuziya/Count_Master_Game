@@ -279,8 +279,9 @@ MonoBehaviour:
   _counter: {fileID: 1983410213946211519}
   _stickman: {fileID: 7882948545266300487, guid: f64b67df79ec7f142b32422e87108b84,
     type: 3}
-  _distanceFactor: 0.152
-  _radius: 0.6
+  _distanceFactor: 0.463
+  _blood: {fileID: 4867465949902732264, guid: 39979cb2f7c8feb4fa75b9585f5a6141, type: 3}
+  IsPlaying: 0
 --- !u!114 &5356340571714836520
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -85,6 +85,7 @@ public class EnemyManager : CharactersManager
 
     public void StartAnimation()
     {
+        
         GetComponent<EnemyAnimating>().ActivateAnimation();
     }
 

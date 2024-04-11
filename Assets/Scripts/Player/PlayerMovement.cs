@@ -15,12 +15,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float _rightBoarder = 3.42f;
     
-
+    private Camera _camera;
     private Vector3 _mouseStartPos, playerStartPos;
     private bool _gameState = false;
-
-    private Camera _camera;
-
+    private bool _movementIsStopped;
+    
     private void Start()
     {
         _camera = Camera.main;
@@ -32,12 +31,30 @@ public class PlayerMovement : MonoBehaviour
     {
         StartGame();
         
-        if (_gameState && !PlayerManager.Instance.IsAttacking())
+        if (_gameState && !PlayerManager.Instance.IsAttacking() && !_movementIsStopped)
         {
             MoveThePlayer(); 
         }
         
     }
+    
+    public bool IsMovementStopped()
+    {
+        return _movementIsStopped;
+    }
+
+    public void PauseMovementForDuration()
+    {
+        ChangeMovementState();
+        Invoke("ChangeMovementState", 1f);
+    }
+
+    private void ChangeMovementState()
+    {
+        _movementIsStopped = !_movementIsStopped;
+    }
+
+
 
     private void StartGame()
     {
@@ -106,5 +123,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _gameState = true;
     }
+
+    
+    
 
 }

@@ -83,7 +83,8 @@ public class PlayerManager : CharactersManager
             {
                 _minusStickmansInvoked = false;
                 _isAttacking = false;
-                _enemy.gameObject.SetActive(false);
+                _enemy.parent.gameObject.SetActive(false);
+                FormatStickMan();
             }
         }
         else
@@ -114,8 +115,7 @@ public class PlayerManager : CharactersManager
 
         // Get the minimum number of stickmen between player and enemy
         var countToDelete = Mathf.Min(_numberOfStickmans, _enemy.gameObject.GetComponent<EnemyManager>().GetNumberOfStickmans());
-
-        Debug.Log(countToDelete);
+        
         var i = 0;
         while (i < countToDelete)
         {
@@ -172,10 +172,14 @@ public class PlayerManager : CharactersManager
         {
             EventManager.Instance.Attack();
             var enemyManager = other.GetComponentInChildren<EnemyManager>();
-            enemyManager.StartAnimation();
-            enemyManager.Attack(transform);
-            _enemy = enemyManager.transform;
-            _isAttacking = true;
+
+            if (enemyManager != null)
+            {
+                enemyManager.StartAnimation();
+                enemyManager.Attack(transform);
+                _enemy = enemyManager.transform;
+                _isAttacking = true;
+            }
         }
     }
     

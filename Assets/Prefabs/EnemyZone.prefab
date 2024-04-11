@@ -239,7 +239,8 @@ MonoBehaviour:
   _stickman: {fileID: 7882948545266300487, guid: c5d0153ce79b28a42bb608e7dfa4f763,
     type: 3}
   _distanceFactor: 0.411
-  Canvas: {fileID: 3990397485242419486}
+  _blood: {fileID: 4867465949902732264, guid: 39979cb2f7c8feb4fa75b9585f5a6141, type: 3}
+  NumberOfStickmans: 0
 --- !u!114 &1404500879111699801
 MonoBehaviour:
   m_ObjectHideFlags: 0

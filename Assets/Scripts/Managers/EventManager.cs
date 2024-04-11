@@ -25,7 +25,7 @@ public class EventManager : MonoBehaviour
     {
         OnGameOver?.Invoke();
     }
-
+    
 
 
     private void Awake()
