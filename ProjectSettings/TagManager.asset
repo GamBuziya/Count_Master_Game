@@ -12,6 +12,7 @@ TagManager:
   - EnemyCharacter
   - Ramp
   - RampStopper
+  - KillZone
   layers:
   - Default
   - TransparentFX

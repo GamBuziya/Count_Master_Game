@@ -78,9 +78,19 @@
                     return;
                 }
 
-                Instantiate(_blood, transform.GetChild(1).position, Quaternion.identity);
-                Destroy(transform.GetChild(1).gameObject);
+                StickmansDestroyer(transform.GetChild(1).gameObject);
+            }
 
+            public void DestroyCurrentOneStickman(GameObject stickman)
+            {
+                StickmansDestroyer(stickman);
+            }
+
+            private void StickmansDestroyer(GameObject stickman)
+            {
+                Instantiate(_blood, transform.GetChild(1).position, Quaternion.identity);
+                
+                Destroy(stickman);
                 _numberOfStickmans--;
                 _counter.text = _numberOfStickmans.ToString();
             }

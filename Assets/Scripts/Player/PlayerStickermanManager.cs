@@ -24,6 +24,11 @@ public class PlayerStickmanManager : MonoBehaviour
                     .SetEase(Ease.Flash);
                 break;
             }
+            case "KillZone":
+            {
+                PlayerManager.Instance.DestroyCurrentOneStickman(gameObject);
+                break;
+            }
         }
     }
     
