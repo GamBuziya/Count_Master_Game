@@ -124,7 +124,4 @@ public class PlayerMovement : MonoBehaviour
         _gameState = true;
     }
 
-    
-    
-
 }
