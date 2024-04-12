@@ -18,7 +18,7 @@ public class GateManager : MonoBehaviour
         }
         else
         {
-            Number = Random.Range(1, 60);
+            Number = Random.Range(10, 60);
             
             _gateNO.text = "+" + Number.ToString();
         }

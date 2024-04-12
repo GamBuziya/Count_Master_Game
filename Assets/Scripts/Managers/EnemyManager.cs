@@ -19,13 +19,13 @@ public class EnemyManager : CharactersManager
         
         CharacterAnimator = GetComponent<EnemyAnimating>();
 
-        if (NumberOfStickmans == 0)
+        if (NumberOfStickmans != 0)
         {
-            _numberOfStickmans = 10;
+            _numberOfStickmans = NumberOfStickmans;
         }
         else
         {
-            _numberOfStickmans = NumberOfStickmans;
+            _numberOfStickmans = Random.Range(5, 60);
         }
         
         
