@@ -67,11 +67,6 @@ public class EnemyManager : CharactersManager
                         Time.deltaTime * 2f);
                 }
             }
-            
-            if (_enemy.GetComponent<PlayerManager>().GetNumberOfStickmans() <= 0)
-            {
-                EventManager.Instance.GameOver();
-            }
         }
         
         

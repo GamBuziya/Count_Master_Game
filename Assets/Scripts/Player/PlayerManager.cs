@@ -102,7 +102,13 @@ public class PlayerManager : CharactersManager
                 }
             }
         }
-        //Це все
+        
+        
+        if (_numberOfStickmans <= 0)
+        {
+            EventManager.Instance.GameOver();
+            gameObject.SetActive(false);
+        }
     }
 
     private void MinusStickmans()

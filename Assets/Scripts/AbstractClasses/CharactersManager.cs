@@ -88,7 +88,7 @@
 
             private void StickmansDestroyer(GameObject stickman)
             {
-                Instantiate(_blood, transform.GetChild(1).position, Quaternion.identity);
+                Instantiate(_blood, stickman.transform.position, Quaternion.identity);
                 
                 Destroy(stickman);
                 _numberOfStickmans--;

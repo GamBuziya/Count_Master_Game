@@ -20,7 +20,7 @@ public class PlayerStickmanManager : MonoBehaviour
                     playerMovement.PauseMovementForDuration();
                 }
 
-                transform.DOJump(transform.position, 1.5f, 1, 1f)
+                transform.DOJump(transform.position, 2f, 1, 1f)
                     .SetEase(Ease.Flash);
                 break;
             }

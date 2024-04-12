@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &2826465716391203450
 Transform:
@@ -93,12 +93,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7448232066242789713}
   - component: {fileID: 5590940679242856506}
+  - component: {fileID: 3470976822484674687}
   m_Layer: 0
   m_Name: LogWithSpikes
-  m_TagString: Untagged
+  m_TagString: KillZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7448232066242789713
 Transform:
@@ -110,7 +111,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5788736, y: 0.40608543, z: 0.5788736, w: 0.40608543}
   m_LocalPosition: {x: 1.1774613, y: 2.98, z: -30.732481}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.10000001, y: 0.1, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 887077962717677988}
@@ -136,8 +137,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.096006, y: 2.8828511, z: 10.876705}
-  m_Center: {x: -0.051241215, y: -0.101893164, z: 0.05349934}
+  m_Size: {x: 1.8432373, y: 2.372217, z: 10.876705}
+  m_Center: {x: 0.5751433, y: -0.3572105, z: 0.053499337}
+--- !u!114 &3470976822484674687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535623585105070947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c6ecd093656ba4cb6412067047200c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
 --- !u!1 &3513742998622049932
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +168,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &887077962717677988
 Transform:
