@@ -13,7 +13,7 @@
             [Header("ParticleEffects")] [SerializeField]
             private ParticleSystem _blood;
             
-            public Animator CharacterAnimator { get; protected set; }
+            public GameAnimator CharacterGameAnimator { get; protected set; }
             protected int _numberOfStickmans;
             protected Transform _enemy;
             protected bool _isAttacking;

@@ -17,7 +17,7 @@ public class EnemyManager : CharactersManager
 
         _enemy = GameObject.Find("Player").GetComponent<Transform>();
         
-        CharacterAnimator = GetComponent<EnemyAnimating>();
+        CharacterGameAnimator = GetComponent<EnemyAnimating>();
 
         if (NumberOfStickmans != 0)
         {
@@ -86,7 +86,7 @@ public class EnemyManager : CharactersManager
 
     public void GameOver()
     {
-        CharacterAnimator.StopAnimating();
+        CharacterGameAnimator.StopAnimating();
         for (int i = 0; i < _enemy.childCount; i++)
         {
             _enemy.gameObject.SetActive(false);

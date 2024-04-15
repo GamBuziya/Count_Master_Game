@@ -20,7 +20,7 @@ public class PlayerManager : CharactersManager
 
     private void Awake()
     {
-        CharacterAnimator = GetComponent<PlayerAnimating>();
+        CharacterGameAnimator = GetComponent<PlayerAnimating>();
         Instance = this;
     }
 

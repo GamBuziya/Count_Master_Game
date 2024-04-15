@@ -7,32 +7,28 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    [SerializeField] private Button _startButton;
     [SerializeField] private Animator _transition;
-
     [SerializeField] private float _transitionTime = 1f;
+    [SerializeField] private string _nextScene;
     
-
-    private void Start()
+    public void LoadNextLevel()
     {
-        if (_startButton != null)
-        {
-            _startButton.onClick.AddListener(LoadNextLevel);
-        }
-        
+        StartCoroutine(LoadLevel(_nextScene));
     }
 
-    private void LoadNextLevel()
-    {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-    }
-
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel(string name)
     {
         _transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(_transitionTime);
         
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(name);
     }
+
+
+    public void ChangeNextScene(string name)
+    {
+        _nextScene = name;
+    }
+
 }

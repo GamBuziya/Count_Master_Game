@@ -2,7 +2,7 @@
 
 namespace AbstractClasses
 {
-    public class Animator : MonoBehaviour
+    public class GameAnimator : MonoBehaviour
     {
         public enum Animations
         {
@@ -31,5 +31,6 @@ namespace AbstractClasses
                 tempAnimator.SetBool(Animations.Run.ToString(), state);
             }
         }
+        
     }
 }

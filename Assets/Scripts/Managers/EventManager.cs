@@ -26,6 +26,12 @@ public class EventManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
     
+    public Action<string> OnLevelChange;
+    public void LevelChange(string SceneName)
+    {
+        OnLevelChange?.Invoke(SceneName);
+    }
+    
 
 
     private void Awake()

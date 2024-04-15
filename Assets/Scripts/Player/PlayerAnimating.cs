@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AbstractClasses;
 using UnityEngine;
-using Animator = AbstractClasses.Animator;
 
-public class PlayerAnimating : Animator
+public class PlayerAnimating : GameAnimator
 {
     
     private void Start()

@@ -4,31 +4,40 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SwipeController : MonoBehaviour, IEndDragHandler
-{
-    [SerializeField] private int maxPage;
+{ 
     [SerializeField] private Vector3 _pageStep;
     [SerializeField] private RectTransform _levelPagesRect;
     [SerializeField] private float _tweenTime;
     [SerializeField] private Ease _tweenType;
 
-    private int _currentPage;
+    [Header("Buttons")] 
+    [SerializeField] private Button _nextButton;
+    [SerializeField] private Button _previousButton;
+    
     private Vector3 _targetPos;
     private float dragThreshuld;
+    private LevelsManager _levelsManager;
+    private int _maxPage;
 
-    private void Awake()
+    private void Start()
     {
-        _currentPage = 1;
+        _levelsManager = GetComponentInChildren<LevelsManager>();
         _targetPos = _levelPagesRect.localPosition;
         dragThreshuld = Screen.width / 10;
+        UpdateArrowButton();
+        _maxPage = _levelsManager.GetLevelsCount();
     }
+    
 
     public void Next()
     {
-        if (_currentPage < maxPage)
+        if (_levelsManager.GetCurrentPage() < _maxPage)
         {
-            _currentPage++;
+            var currentPage = _levelsManager.GetCurrentPage() + 1;
+            _levelsManager.SetCurrentPage(currentPage);
             _targetPos += _pageStep;
             MovePage();
         }
@@ -36,9 +45,10 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
 
     public void Previous()
     {
-        if (_currentPage > 1)
+        if (_levelsManager.GetCurrentPage() > 1)
         {
-            _currentPage--;
+            var currentPage = _levelsManager.GetCurrentPage() - 1;
+            _levelsManager.SetCurrentPage(currentPage);
             _targetPos -= _pageStep;
             MovePage();
         }
@@ -47,6 +57,7 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
     void MovePage()
     {
         _levelPagesRect.DOLocalMove(_targetPos, _tweenTime).SetEase(_tweenType);
+        UpdateArrowButton();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -60,5 +71,16 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
         {
             MovePage();
         }
+    }
+
+    private void UpdateArrowButton()
+    {
+        _nextButton.interactable = true;
+        _previousButton.interactable = true;
+        
+        
+        if (_levelsManager.GetCurrentPage() == 1) _previousButton.interactable = false;
+        else if(_levelsManager.GetCurrentPage() == _maxPage) _nextButton.interactable = false;
+        
     }
 }

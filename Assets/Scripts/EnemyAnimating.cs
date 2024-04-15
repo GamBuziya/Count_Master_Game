@@ -2,7 +2,7 @@
 
 namespace DefaultNamespace
 {
-    public class EnemyAnimating : Animator
+    public class EnemyAnimating : GameAnimator
     {
         
     }
