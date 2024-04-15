@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : BasicLevelLoader
 {
-    [SerializeField] private Animator _transition;
-    [SerializeField] private float _transitionTime = 1f;
-    [SerializeField] private string _nextScene;
+    private string _nextScene;
     
     public void LoadNextLevel()
     {
@@ -22,15 +21,8 @@ public class LevelLoader : MonoBehaviour
 
         yield return new WaitForSeconds(_transitionTime);
         
-        Scene scene = SceneManager.GetSceneByName(name);
-        if (scene.IsValid())
-        {
-            SceneManager.LoadScene(name);
-        }
-        else
-        {
-            Debug.LogError("Scene with name " + name + " does not exist.");
-        }
+        
+        SceneManager.LoadScene(name);
     }
 
 
