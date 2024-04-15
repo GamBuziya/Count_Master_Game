@@ -22,7 +22,15 @@ public class LevelLoader : MonoBehaviour
 
         yield return new WaitForSeconds(_transitionTime);
         
-        SceneManager.LoadScene(name);
+        Scene scene = SceneManager.GetSceneByName(name);
+        if (scene.IsValid())
+        {
+            SceneManager.LoadScene(name);
+        }
+        else
+        {
+            Debug.LogError("Scene with name " + name + " does not exist.");
+        }
     }
 
 
