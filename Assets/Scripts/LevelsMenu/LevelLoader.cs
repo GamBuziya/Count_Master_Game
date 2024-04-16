@@ -6,8 +6,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelLoader : BasicLevelLoader
+public class LevelLoader : MonoBehaviour
 {
+    [SerializeField] private TransitionManager _transitionManager;
+    [SerializeField] private float _transitionTime = 1f;
+    
     private string _nextScene;
     
     public void LoadNextLevel()
@@ -17,8 +20,7 @@ public class LevelLoader : BasicLevelLoader
 
     IEnumerator LoadLevel(string name)
     {
-        _transition.SetTrigger("Start");
-
+        _transitionManager.StartTransAnimation();
         yield return new WaitForSeconds(_transitionTime);
         
         

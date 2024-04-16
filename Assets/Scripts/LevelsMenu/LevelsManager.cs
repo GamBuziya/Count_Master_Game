@@ -18,7 +18,7 @@ public class LevelsManager : MonoBehaviour
 
     private void Start()
     {
-        _levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+        _levelLoader = GameObject.Find("LevelsLoader").GetComponent<LevelLoader>();
         _levelLoader.ChangeNextScene(_levels[_currentPage - 1]._levelSo.SceneName);
     }
 
