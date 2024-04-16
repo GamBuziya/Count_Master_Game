@@ -17,7 +17,7 @@
             protected int _numberOfStickmans;
             protected Transform _enemy;
             protected bool _isAttacking;
-            protected float _coefficient = 0.05f;
+            protected float _coefficient = 0.02f;
 
             
             public void FormatStickMan()

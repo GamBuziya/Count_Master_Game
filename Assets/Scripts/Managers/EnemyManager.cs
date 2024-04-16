@@ -86,6 +86,7 @@ public class EnemyManager : CharactersManager
 
     public void GameOver()
     {
+        SoundManager.Instance.PlayFailSound();
         CharacterGameAnimator.StopAnimating();
         for (int i = 0; i < _enemy.childCount; i++)
         {

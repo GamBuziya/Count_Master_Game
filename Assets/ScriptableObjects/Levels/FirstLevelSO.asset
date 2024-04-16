@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05aea87eba8d93c4f958d56ff45b0419, type: 3}
-  m_Name: SecondLevel
+  m_Name: FirstLevelSO
   m_EditorClassIdentifier: 
-  SceneName: Level2
-  HasEnemies: 1
+  SceneName: Level1
+  HasEnemies: 0
   HasTraps: 1
   HasBoss: 0

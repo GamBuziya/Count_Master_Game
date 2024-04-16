@@ -23,10 +23,5 @@ public class GateManager : MonoBehaviour
             _gateNO.text = "+" + Number.ToString();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

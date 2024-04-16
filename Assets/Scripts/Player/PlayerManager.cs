@@ -134,10 +134,9 @@ public class PlayerManager : CharactersManager
 
     private void DeleteWithInvoke()
     {
-        // Ensure both player and enemy have stickmen to delete
         if (_numberOfStickmans > 0 && _enemy.gameObject.GetComponent<EnemyManager>().GetNumberOfStickmans() > 0)
         {
-            // Delete one stickman from both player and enemy
+            SoundManager.Instance.PlayFightSound();
             _enemy.gameObject.GetComponent<EnemyManager>().DestroyOneStickman();
             DestroyOneStickman();
         }
@@ -172,6 +171,7 @@ public class PlayerManager : CharactersManager
     {
         if (other.CompareTag("Gate"))
         {
+            SoundManager.Instance.PlayGateSound();
             UpdateNumber(other.GetComponent<GateManager>().Multiply, other.GetComponent<GateManager>().Number);
         }
         else if (other.CompareTag("Enemy"))

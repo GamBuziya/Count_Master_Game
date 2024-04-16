@@ -17,6 +17,7 @@ public class PlayerStickmanManager : MonoBehaviour
                 var playerMovement = PlayerManager.Instance.GetComponent<PlayerMovement>();
                 if (!playerMovement.IsMovementStopped())
                 {
+                    SoundManager.Instance.PlayJumpSound();
                     playerMovement.PauseMovementForDuration();
                 }
 
@@ -26,6 +27,7 @@ public class PlayerStickmanManager : MonoBehaviour
             }
             case "KillZone":
             {
+                SoundManager.Instance.PlayKillZoneSound();
                 PlayerManager.Instance.DestroyCurrentOneStickman(gameObject);
                 break;
             }
