@@ -11,16 +11,16 @@ public class UIManager : MonoBehaviour
 
     public void LevelsChooserButton()
     {
-        _mainMenu.DOAnchorPos(new Vector2(-1100, 0), 0.25f);
-        _levelsChooser.DOAnchorPos(new Vector2(0, 0), 0.75f)
-            .OnComplete(() => SoundManager.Instance.PlayUITransformSound());
+        _mainMenu.DOAnchorPos(new Vector2(-1100, 0), 0.25f).SetUpdate(true);
+        _levelsChooser.DOAnchorPos(new Vector2(0, 0), 0.75f).SetUpdate(true)
+            .OnComplete(() => SoundManager.Instance.PlayUITransformSound()).SetUpdate(true);
     }
     
     public void MainMenuButton()
     {
-        _mainMenu.DOAnchorPos(new Vector2(0, 0), 0.75f)
-            .OnComplete(() => SoundManager.Instance.PlayUITransformSound());
+        _mainMenu.DOAnchorPos(new Vector2(0, 0), 0.75f).SetUpdate(true)
+            .OnComplete(() => SoundManager.Instance.PlayUITransformSound()).SetUpdate(true);
         
-        _levelsChooser.DOAnchorPos(new Vector2(0, 2000), 0.25f);
+        _levelsChooser.DOAnchorPos(new Vector2(0, 2000), 0.25f).SetUpdate(true);
     }
 }

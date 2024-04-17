@@ -26,6 +26,18 @@ public class EventManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
     
+    public Action OnStartPause;
+    public void PauseStart()
+    {
+        OnStartPause?.Invoke();
+    }
+    
+    public Action OnEndPause;
+    public void PauseEnd()
+    {
+        OnEndPause?.Invoke();
+    }
+    
     public Action<string> OnLevelChange;
     public void LevelChange(string SceneName)
     {

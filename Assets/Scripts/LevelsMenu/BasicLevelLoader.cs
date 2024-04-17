@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,17 +11,19 @@ namespace DefaultNamespace
         [SerializeField] protected float _transitionTime = 1f;
         
         
-        public void LoadNextLevel()
+        public void LoadSceneByIndex(int index)
         {
-            var index = SceneManager.GetActiveScene().buildIndex + 1;
-            StartCoroutine(LoadLevel(index));
+            StartCoroutine(LoadScene(index));
         }
+        
 
-        IEnumerator LoadLevel(int index)
+        IEnumerator LoadScene(int index)
         {
             _transition.SetTrigger("Start");
-            yield return new WaitForSeconds(_transitionTime);
-             
+            yield return new WaitForSecondsRealtime(_transitionTime);
+            
+            DOTween.KillAll();
+            Time.timeScale = 1f;
             SceneManager.LoadScene(index);
         }
     }

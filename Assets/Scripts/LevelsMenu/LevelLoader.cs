@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,9 +22,10 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevel(string name)
     {
         _transitionManager.StartTransAnimation();
-        yield return new WaitForSeconds(_transitionTime);
-        
-        
+        yield return new WaitForSecondsRealtime(_transitionTime);
+
+        DOTween.KillAll();
+        Time.timeScale = 1f;
         SceneManager.LoadScene(name);
     }
 

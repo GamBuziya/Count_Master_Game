@@ -68,6 +68,14 @@ public class SoundManager : MonoBehaviour
     
     private void PlaySound(AudioClip audioClip)
     {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, _volume);
+            Time.timeScale = 0;
+            return;
+        }
+        
         AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, _volume);
     }
 }

@@ -24,19 +24,19 @@ namespace DefaultNamespace.General
         
         private void Anim()
         {
-            transform.DOScale(upScale, 0.1f);
+            transform.DOScale(upScale, 0.1f).SetUpdate(true);
             isWhite = !isWhite;
             
             if (isWhite)
             {
-                GetComponent<Image>().DOColor(Color.white, 0.1f);
+                GetComponent<Image>().DOColor(Color.white, 0.1f).SetUpdate(true);
             }
             else
             {
-                GetComponent<Image>().DOColor(Color.red, 0.1f);
+                GetComponent<Image>().DOColor(Color.red, 0.1f).SetUpdate(true);
             }
             
-            transform.DOScale(Vector3.one, 0.1f).SetDelay(0.1f);
+            transform.DOScale(Vector3.one, 0.1f).SetDelay(0.1f).SetUpdate(true);
         }
     }
 }
