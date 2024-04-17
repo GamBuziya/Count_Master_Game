@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
 
     private void EventManager_OnGameStart()
     {
-        gameObject.SetActive(false);
+        _hand.transform.parent.gameObject.SetActive(false);
     }
 }
 

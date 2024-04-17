@@ -29,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        StartGame();
-        
         if (_gameState && !PlayerManager.Instance.IsAttacking() && !_movementIsStopped)
         {
             MoveThePlayer(); 
@@ -55,15 +53,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-    private void StartGame()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _gameState = true;
-            EventManager.Instance.GameStart();
-        }
-    }
+    
 
     void MoveThePlayer()
     {
@@ -123,5 +113,5 @@ public class PlayerMovement : MonoBehaviour
     {
         _gameState = true;
     }
-
+    
 }
