@@ -15,4 +15,4 @@ MonoBehaviour:
   SceneName: Level3
   HasEnemies: 1
   HasTraps: 1
-  HasBoss: 1
+  HasBoss: 0

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName: Level1
   HasEnemies: 0
-  HasTraps: 1
+  HasTraps: 0
   HasBoss: 0

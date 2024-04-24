@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelsManager : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class LevelsManager : MonoBehaviour
     {
         _levelLoader = GameObject.Find("LevelsLoader").GetComponent<LevelLoader>();
         _levelLoader.ChangeNextScene(_levels[_currentPage - 1]._levelSo.SceneName);
+        
     }
+    
 
 
     public void SetCurrentPage(int number)

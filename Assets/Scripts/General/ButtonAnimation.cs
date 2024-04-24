@@ -24,7 +24,7 @@ public class ButtonAnimation : MonoBehaviour
 
         if (effectSoundManager == null)
         {
-            Debug.LogError("EffectSoundManager isn`t exist");
+            //Debug.LogError("EffectSoundManager isn`t exist");
             return;
         }
         

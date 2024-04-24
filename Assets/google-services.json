@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "49483690600",
+    "project_id": "sticmansgame",
+    "storage_bucket": "sticmansgame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49483690600:android:5b98dc89621e8fcf4181dd",
+        "android_client_info": {
+          "package_name": "com.UnityTechnologies.com.unity.template.urpblank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWLbCt7uHEpmdaTws5jbKB6rMbX7cyfV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
