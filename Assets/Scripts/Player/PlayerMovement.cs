@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _camera = Camera.main;
         EventManager.Instance.OnGameStart += EventManager_OnGameStart;
+        EventManager.Instance.OnFinish += () =>
+        {
+            _movementIsStopped = true;
+        };
     }
 
 

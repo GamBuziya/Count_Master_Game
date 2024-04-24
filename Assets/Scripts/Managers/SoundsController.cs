@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,13 @@ public class SoundsController : MonoBehaviour
 
     private bool State = true;
 
+    private void Start()
+    {
+        EventManager.Instance.OnFinish += MusicOff;
+        EventManager.Instance.OnFail += MusicOff;
+    }
+
+    
     public void ChangeSoundState()
     {
         State = !State;
@@ -21,5 +29,10 @@ public class SoundsController : MonoBehaviour
             Debug.LogWarning("SoundManager isn`t correct");
         }
         _musicManager.SetActive(State);
+    }
+
+    private void MusicOff()
+    {
+        _musicManager.SetActive(false);
     }
 }

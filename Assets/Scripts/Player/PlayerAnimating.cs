@@ -10,7 +10,7 @@ public class PlayerAnimating : GameAnimator
     private void Start()
     {
         EventManager.Instance.OnGameStart += ActivateAnimation;
-        
+        EventManager.Instance.OnFinish += StopAnimating;
         GetComponent<PlayerManager>().OnMakeStickman += ActivateAnimation;
     }
     

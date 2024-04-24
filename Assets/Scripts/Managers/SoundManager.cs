@@ -18,6 +18,16 @@ public class SoundManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        if (EventManager.Instance)
+        {
+            EventManager.Instance.OnFail += PlayFailSound;
+            EventManager.Instance.OnFinish += PlayFinishSound;
+        }
+        
+    }
+
     public void ChangeSoundState()
     {
         _soundOn = !_soundOn;
@@ -39,6 +49,12 @@ public class SoundManager : MonoBehaviour
     public void PlayFailSound()
     {
         PlaySound(_audioClipRefSO.Fail);
+    }
+    
+    public void PlayFinishSound()
+    {
+        Debug.Log("PlayFinishSound");
+        PlaySound(_audioClipRefSO.Finish);
     }
     
     public void PlayGateSound()

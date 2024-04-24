@@ -1,7 +1,6 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace DefaultNamespace
@@ -19,6 +18,12 @@ namespace DefaultNamespace
             _levelData = GetComponent<Level>();
             _enemiesMarker.gameObject.SetActive(_levelData._levelSo.HasEnemies);
             _killZoneMarker.gameObject.SetActive(_levelData._levelSo.HasTraps);
+
+
+            StartCoroutine(DatabaseManager.Instance.GetLevelScore(_levelData._levelSo.SceneName, record =>
+            {
+                _recordText.text = "Record: " + record.ToString();
+            }));
         }
     }
 }

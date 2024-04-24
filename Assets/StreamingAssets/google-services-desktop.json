@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "49483690600",
+    "firebase_url": "https://sticmansgame-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "sticmansgame",
     "storage_bucket": "sticmansgame.appspot.com"
   },

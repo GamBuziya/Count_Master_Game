@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using AbstractClasses;
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
@@ -10,9 +11,9 @@ using UnityEngine.UI;
 
 public class PlayerManager : CharactersManager
 {
-    public Action OnMakeStickman;
     public static PlayerManager Instance;
-
+    
+    public Action OnMakeStickman;
     public bool IsPlaying;
     
     
@@ -31,9 +32,18 @@ public class PlayerManager : CharactersManager
             IsPlaying = true;
         };
 
-        EventManager.Instance.OnGameOver += () =>
+        EventManager.Instance.OnFail += () =>
         {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
             IsPlaying = false;
+        };
+
+        EventManager.Instance.OnFinish += () =>
+        {
+            DatabaseManager.Instance.CreateScore(_numberOfStickmans);
         };
         UpdateUI();
     }
@@ -106,7 +116,7 @@ public class PlayerManager : CharactersManager
         
         if (_numberOfStickmans <= 0)
         {
-            EventManager.Instance.GameOver();
+            EventManager.Instance.Fail();
             gameObject.SetActive(false);
         }
     }
@@ -186,6 +196,11 @@ public class PlayerManager : CharactersManager
                 _enemy = enemyManager.transform;
                 _isAttacking = true;
             }
+        }
+        else if (other.CompareTag("Finish"))
+        {
+            EventManager.Instance.Finish();
+            IsPlaying = false;
         }
     }
     

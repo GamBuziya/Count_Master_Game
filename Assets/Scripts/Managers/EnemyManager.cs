@@ -12,7 +12,7 @@ public class EnemyManager : CharactersManager
     [SerializeField] private int NumberOfStickmans;
     private void Start()
     {
-        EventManager.Instance.OnGameOver += GameOver;
+        EventManager.Instance.OnFail += GameOver;
 
 
         _enemy = GameObject.Find("Player").GetComponent<Transform>();
@@ -86,12 +86,7 @@ public class EnemyManager : CharactersManager
 
     public void GameOver()
     {
-        SoundManager.Instance.PlayFailSound();
         CharacterGameAnimator.StopAnimating();
-        for (int i = 0; i < _enemy.childCount; i++)
-        {
-            _enemy.gameObject.SetActive(false);
-        }
     }
     
     

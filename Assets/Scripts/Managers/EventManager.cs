@@ -20,10 +20,17 @@ public class EventManager : MonoBehaviour
         OnAttack?.Invoke();
     }
 
-    public Action OnGameOver;
-    public void GameOver()
+    public Action OnFail;
+    public void Fail()
     {
-        OnGameOver?.Invoke();
+        OnFail?.Invoke();
+    }
+    
+    
+    public Action OnFinish;
+    public void Finish()
+    {
+        OnFinish?.Invoke();
     }
     
     public Action OnStartPause;
