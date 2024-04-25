@@ -21,14 +21,30 @@ public class DatabaseManager : MonoBehaviour
         _dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-    public void CreateScore(int score)
+    public IEnumerator CreateOrReplaceScore(string levelName, int newScore)
     {
-        var levelName = SceneManager.GetActiveScene().name;
-        LevelScore newScore = new LevelScore(levelName, score);
-        string json = JsonUtility.ToJson(newScore);
-
-        _dbReference.Child("scores").Child(_userId).Child(levelName).SetRawJsonValueAsync(json);
+        var scoreData = _dbReference.Child("scores").Child(_userId).Child(levelName).Child("MaxScore").GetValueAsync();
+    
+        yield return new WaitUntil(predicate: () => scoreData.IsCompleted);
+    
+        if (scoreData.Result.Value != null) // Перевірка на наявність даних
+        {
+            DataSnapshot snapshot = scoreData.Result;
+            int currentMaxScore = int.Parse(snapshot.Value.ToString());
+        
+            if (currentMaxScore < newScore)
+            {
+                string json = JsonUtility.ToJson(new LevelScore(levelName, newScore));
+                _dbReference.Child("scores").Child(_userId).Child(levelName).SetRawJsonValueAsync(json);
+            }
+        }
+        else
+        {
+            string json = JsonUtility.ToJson(new LevelScore(levelName, newScore));
+            _dbReference.Child("scores").Child(_userId).Child(levelName).SetRawJsonValueAsync(json);
+        }
     }
+
 
 
     public IEnumerator GetLevelName(Action<string> onCallback)

@@ -16,6 +16,11 @@ namespace DefaultNamespace
             StartCoroutine(LoadScene(index));
         }
         
+        public void RestartLevel()
+        {
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
+        }
+        
 
         IEnumerator LoadScene(int index)
         {

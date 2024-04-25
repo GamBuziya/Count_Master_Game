@@ -7,6 +7,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : CharactersManager
@@ -43,8 +44,9 @@ public class PlayerManager : CharactersManager
 
         EventManager.Instance.OnFinish += () =>
         {
-            DatabaseManager.Instance.CreateScore(_numberOfStickmans);
-        };
+            StartCoroutine(DatabaseManager.Instance.CreateOrReplaceScore(SceneManager.GetActiveScene().name, _numberOfStickmans));
+        }; 
+        
         UpdateUI();
     }
 

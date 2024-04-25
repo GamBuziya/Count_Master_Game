@@ -30,7 +30,6 @@ public class ButtonAnimation : MonoBehaviour
         
         if (effectSoundManager.TryGetComponent(out SoundManager soundManager))
         {
-            Debug.Log("OK");
             _soundManager = soundManager;
         }
         else
