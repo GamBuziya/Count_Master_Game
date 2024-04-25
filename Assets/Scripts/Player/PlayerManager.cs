@@ -155,18 +155,11 @@ public class PlayerManager : CharactersManager
     }
 
 
-    private void UpdateNumber(bool multiply, int number)
+    private void UpdateNumber (int number)
     {
         var temp = 0;
-
-        if (multiply)
-        {
-            temp = (_numberOfStickmans * number) - _numberOfStickmans;
-        }
-        else
-        {
-            temp = number;
-        }
+        
+        temp = number;
         
         for (int i = 0; i < temp; i++)
         {
@@ -184,7 +177,7 @@ public class PlayerManager : CharactersManager
         if (other.CompareTag("Gate"))
         {
             SoundManager.Instance.PlayGateSound();
-            UpdateNumber(other.GetComponent<GateManager>().Multiply, other.GetComponent<GateManager>().Number);
+            UpdateNumber(other.GetComponent<GateManager>().Number);
         }
         else if (other.CompareTag("Enemy"))
         {

@@ -8,20 +8,10 @@ public class GateManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gateNO;
 
     public int Number;
-    public bool Multiply;
     void Start()
     {
-        if (Multiply)
-        {
-            Number = Random.Range(1, 3);
-            _gateNO.text = "X" + Number.ToString();
-        }
-        else
-        {
-            Number = Random.Range(10, 60);
-            
+        Number = Random.Range(10, 60);
             _gateNO.text = "+" + Number.ToString();
-        }
     }
     
 }

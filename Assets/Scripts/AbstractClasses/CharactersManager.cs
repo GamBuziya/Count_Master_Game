@@ -83,6 +83,8 @@
 
             public void DestroyCurrentOneStickman(GameObject stickman)
             {
+                DOTween.Kill(stickman.transform);
+                 
                 StickmansDestroyer(stickman);
             }
 
@@ -91,6 +93,7 @@
                 Instantiate(_blood, stickman.transform.position, Quaternion.identity);
                 
                 Destroy(stickman);
+                
                 _numberOfStickmans--;
                 _counter.text = _numberOfStickmans.ToString();
             }
